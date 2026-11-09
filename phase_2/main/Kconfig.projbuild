@@ -1,0 +1,14 @@
+menu "SuperNova Phase 2"
+
+    config SN_ENABLE_ESPNOW
+        bool "Compile the ESP-NOW transport adapter"
+        default n
+        depends on ESP_WIFI_ENABLED
+        help
+            Compiles the single-hop ESP-NOW adapter in sn_transport. It remains
+            uninitialized unless application code explicitly calls it. Radios are
+            disabled by default and must never be started during QEMU evaluation.
+            Multi-hop routing, peer authentication, retransmission, and partition
+            recovery are deferred.
+
+endmenu

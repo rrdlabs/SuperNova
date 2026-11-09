@@ -1,0 +1,38 @@
+# SuperNova Phase 2 defaults: ESP32-S3, 8 MB flash, radios off, no eFuse work.
+CONFIG_IDF_TARGET="esp32s3"
+
+# 8 MB is the QEMU harness image size and the only size accepted by --flash
+# unless the generated sdkconfig is deliberately changed and re-reviewed.
+CONFIG_ESPTOOLPY_FLASHSIZE_8MB=y
+CONFIG_ESPTOOLPY_FLASHSIZE="8MB"
+
+# A single large factory application keeps the diagnostic suite within the
+# default partition layout without adding an OTA or data partition.
+CONFIG_PARTITION_TABLE_SINGLE_APP_LARGE=y
+
+# Radios stay disabled at runtime. ESP-IDF forces CONFIG_ESP_WIFI_ENABLED=y on
+# the ESP32-S3, so the Wi-Fi component is compiled, but the application never
+# initializes Wi-Fi and never starts a radio. The ESP-NOW adapter is compiled
+# only when the project Kconfig option CONFIG_SN_ENABLE_ESPNOW is explicitly
+# enabled (default n), and QEMU must build with it unset.
+# CONFIG_SN_ENABLE_ESPNOW is not set
+# CONFIG_BT_ENABLED is not set
+
+# Keep Secure Boot and flash encryption disabled. Enabling either can
+# irreversibly change eFuse state on first boot.
+# CONFIG_SECURE_BOOT is not set
+# CONFIG_SECURE_FLASH_ENC_ENABLED is not set
+
+# The deterministic suite performs software P-256 operations. QEMU emulates
+# them far more slowly than hardware, so use the performance optimization level
+# to keep a complete run bounded. This does not change test semantics.
+CONFIG_COMPILER_OPTIMIZATION_PERF=y
+
+CONFIG_LOG_DEFAULT_LEVEL_INFO=y
+CONFIG_ESP_TASK_WDT_EN=y
+CONFIG_ESP_TASK_WDT_TIMEOUT_S=10
+
+# The deterministic diagnostic suite uses fixed-size wire, block, ledger, and
+# snapshot buffers on the single-threaded main task. 64 KiB keeps those buffers
+# bounded and avoids stack overflow without dynamic allocation in the tests.
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=65536

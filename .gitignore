@@ -1,0 +1,150 @@
+# =============================================================================
+# SuperNova — repository-wide ignore rules
+# =============================================================================
+# Keep secrets, firmware images, generated build output, PDFs and internal
+# research/IP artifacts out of Git and off remotes. Source, CMake recipes,
+# sdkconfig.defaults and normal project documentation remain tracked.
+#
+# Never force-add a file matched below unless you have confirmed it contains
+# no credentials or confidential material.
+# =============================================================================
+
+# --- Secrets, credentials and private keys (NEVER COMMIT) --------------------
+.env
+.env.*
+!.env.example
+*.env
+*.secret
+*.secrets
+*.key
+*.pem
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.kdbx
+*.ovpn
+*.ppk
+id_rsa*
+id_dsa*
+id_ecdsa*
+id_ed25519*
+*.crt
+*.cer
+*.der
+*.csr
+*.jwt
+*.token
+secrets/
+secret/
+credentials/
+*_credentials*
+*_secrets*
+auth.json
+.netrc
+.npmrc
+.pypirc
+
+# --- Firmware images, build output and debug artifacts -----------------------
+build/
+**/build/
+firmware/
+firmware_logs/
+qemu-runs/
+**/qemu-runs/
+*.bin
+*.elf
+*.hex
+*.ihex
+*.srec
+*.img
+*.uf2
+*.dfu
+*.axf
+*.out
+*.map
+*.o
+*.obj
+*.a
+*.so
+*.so.*
+*.dylib
+*.dll
+*.exe
+*.factory
+*.ota
+*.signed
+*.ninja
+*.ninja_log
+*.ninja_deps
+.ninja_deps
+.ninja_log
+CMakeCache.txt
+CMakeFiles/
+compile_commands.json
+cmake_install.cmake
+*.log
+
+# --- Generated ESP-IDF config (may contain Wi-Fi keys/passwords) -------------
+sdkconfig
+sdkconfig.old
+sdkconfig.*.old
+# Keep the reproducible defaults:
+!sdkconfig.defaults
+!sdkconfig.defaults.*
+
+# --- PDFs and exported documents ---------------------------------------------
+*.pdf
+*.PDF
+*.doc
+*.docx
+*.ppt
+*.pptx
+*.xls
+*.xlsx
+*.odt
+*.ods
+*.odp
+*.epub
+*.mobi
+
+# --- Internal research and confidential IP -----------------------------------
+**/docs/sources/
+*_inquiry.md
+*inquiry*.md
+*research-notes*.md
+*agent-brief*.md
+*security hardening*.txt
+*hardening*.txt
+*internal*.md
+*confidential*
+*proprietary*
+*.pcap
+*.pcapng
+*.trace
+*.dump
+*.sqlite
+*.sqlite3
+*.db
+
+# --- Archives (may contain any of the above) ---------------------------------
+*.zip
+*.tar
+*.tar.*
+*.tgz
+*.gz
+*.bz2
+*.xz
+*.7z
+*.rar
+*.iso
+
+# --- OS / editor / tooling cruft ---------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+.vscode/*
+!.vscode/settings.json

@@ -1,0 +1,15 @@
+# Phase 1 build output and generated configuration
+build/
+sdkconfig
+sdkconfig.old
+sdkconfig.*.old
+
+# Firmware images, symbols and logs
+*.bin
+*.elf
+*.hex
+*.map
+*.log
+
+# Internal research sources (thesis PDF, historical manuscript)
+docs/sources/

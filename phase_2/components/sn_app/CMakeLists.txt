@@ -1,0 +1,20 @@
+idf_component_register(
+    SRCS
+        "sn_app.c"
+        "sn_app_test_keys.c"
+        "sn_app_tests_protocol.c"
+        "sn_app_tests_crypto.c"
+        "sn_app_tests_ledger.c"
+        "sn_app_tests_consensus.c"
+        "sn_app_tests_storage.c"
+        "sn_app_tests_transport.c"
+        "sn_app_tests_e2e.c"
+    INCLUDE_DIRS "include"
+    REQUIRES
+        sn_protocol
+        sn_crypto
+        sn_ledger
+        sn_consensus
+        sn_storage
+        sn_transport
+)
